@@ -1,0 +1,1 @@
+Here MongoDB Files will be stored. This folder will be added to the Kubernetes Volumes
