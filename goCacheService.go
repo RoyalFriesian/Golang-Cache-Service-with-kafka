@@ -25,6 +25,8 @@ const (
 	username_bk   = "myTester2"
 	password_bk   = "mytester2pass"
 	collection_bk = "data"
+
+	kafkaBroker	  = "localhost:9092"
 )
 
 type Data struct {
@@ -41,7 +43,7 @@ type Response struct {
 func main() {
 	go StartKafka()
 	//pagination()
-	http.HandleFunc("/reload", reload)
+	//http.HandleFunc("/reload", reload)
 	http.HandleFunc("/insert", Insert)
 	http.HandleFunc("/data/page/", pagination)
 	//http.HandleFunc("/", HelloServer)
@@ -90,7 +92,7 @@ func pagination(w http.ResponseWriter, r *http.Request) {
 
 func StartKafka() {
 	conf := kafka.ReaderConfig{
-		Brokers:  []string{"localhost:9092"},
+		Brokers:  []string{kafkaBroker},
 		Topic:    "myTopic",
 		GroupID:  "g1",
 		MaxBytes: 10,
@@ -102,13 +104,17 @@ func StartKafka() {
 			fmt.Println("Some error occured", err)
 			continue
 		}
+		if string(m.Value) == "reload" {
+			reload()
+			
+		}
 		fmt.Println("Message is ", string(m.Value))
 	}
 }
 
-func reload(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+func reload() {
+	//w.Header().Set("Content-Type", "application/json")
+	//w.WriteHeader(http.StatusOK)
 
 	info := &mgo.DialInfo{
 		Addrs:    []string{hosts},
@@ -151,7 +157,8 @@ func reload(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 		}
 	}
-	w.Write([]byte("[{'status':200, 'msg':'SUCCESS'}]"))
+	fmt.Println("Database Re-loaded")
+	//w.Write([]byte("[{'status':200, 'msg':'SUCCESS'}]"))
 }
 
 func Insert(w http.ResponseWriter, r *http.Request) {
@@ -219,3 +226,4 @@ func bootstrapCleanDB(s *mgo.Session) *mgo.Collection {
 
 	return c
 }
+
