@@ -1,6 +1,5 @@
 # Golang-Cache-Service-with-kafka
-Do not take this code seriously! It is just a 4 days work. There is huge scope of improvement.  
-
+Cache service using Go and Mongodb. Reload database from backup db by passing message from kafka producer. 
 
 # Steps to run the setup
   Suppose your work directory is 
