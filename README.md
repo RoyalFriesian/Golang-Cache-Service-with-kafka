@@ -109,7 +109,7 @@ http://localhost:8080/insert
 http://localhost:8080/data/page/?page=1
 ```
 
-### 8. Reload data from backup db to cachedb from kafka data pipline 
+### 9. Reload data from backup db to cachedb from kafka data pipline 
   * Open kafka producer 
 ```
 C:\WINDOWS\system32>docker exec -it kafka /bin/sh
