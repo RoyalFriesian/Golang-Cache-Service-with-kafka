@@ -96,7 +96,7 @@ const (
 ```
 
 ### 5. Run the Kafka and Zookeeper in docker 
-### 6. Run golang program main.go
+### 6. Run golang program goCacheService.go
 
 ### 7. Open postman and push some entries in database 
   * post variables are key and data
