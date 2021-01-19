@@ -86,7 +86,7 @@ func pagination(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("Norm Find Data: %+v\n", data)
 		json.NewEncoder(w).Encode(data)
 	} else {
-		fmt.Printf("Wrong Request!")
+		fmt.Printf("[{\"status\" : \"Wrong Request!\"}])
 	}
 }
 
