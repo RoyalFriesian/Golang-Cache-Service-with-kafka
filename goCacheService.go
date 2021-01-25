@@ -211,9 +211,9 @@ func bootstrap(s *mgo.Session) *mgo.Collection {
 	c.EnsureIndex(index)
 	return c
 }
-
+			   
+//At the time of reload cache from backup database we first need to clean the DB. 
 func bootstrapCleanDB(s *mgo.Session) *mgo.Collection {
-
 	s.DB(database).DropDatabase()
 	c := s.DB(database).C("backup")
 	index := mgo.Index{
